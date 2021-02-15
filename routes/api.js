@@ -1,3 +1,4 @@
+//Including requirements
 const router = require('express').Router();
 const Workout = require('../models/workout.js');
 
@@ -15,7 +16,6 @@ router.put('/api/workouts/:id', ({ body, params }, res) => {
   Workout.findByIdAndUpdate(
     params.id,
     { $push: { exercises: body } },
-    // "runValidators" will ensure new exercises meet our schema requirements
     { new: true, runValidators: true }
   )
     .then((dbWorkout) => {
@@ -74,5 +74,4 @@ router.delete('/api/workouts', ({ body }, res) => {
       res.json(err);
     });
 });
-
 module.exports = router;
